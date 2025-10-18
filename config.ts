@@ -10,7 +10,7 @@ export class Config {
   static ADMIN_PASSWORD = Deno.env.get("ADMIN_PASSWORD") || "admin123";
   
   // JWT 配置
-  static JWT_SECRET = Deno.env.get("JWT_SECRET") || crypto.randomUUID();
+  static JWT_SECRET = Deno.env.get("JWT_SECRET") || "default-system-jwt-secret";
   static JWT_EXPIRY_DAYS = parseInt(Deno.env.get("JWT_EXPIRY_DAYS") || "30");
   
   // 默认 API Keys
