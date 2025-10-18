@@ -612,9 +612,7 @@ export function getDashboardPage(): string {
             const response = await fetch(url, { ...defaultOptions, ...options });
             
             if (response.status === 401) {
-                //localStorage.removeItem('admin_token');
-                //window.location.href = '/';
-                alert('API请求401，失败地址：' + url + '；失败响应：' + response);
+                alert('API请求响应401，请确保已正确设置JWT_SECRET环境变量，请求地址：' + url);
                 return;
             }
             
