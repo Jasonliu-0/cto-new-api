@@ -538,6 +538,7 @@ export function getDashboardPage(): string {
         // 页面加载
         document.addEventListener('DOMContentLoaded', function() {
             if (!token) {
+                alert("获取token失败，请重新登录，token为：" + token);
                 window.location.href = '/';
                 return;
             }
@@ -611,8 +612,9 @@ export function getDashboardPage(): string {
             const response = await fetch(url, { ...defaultOptions, ...options });
             
             if (response.status === 401) {
-                localStorage.removeItem('admin_token');
-                window.location.href = '/';
+                //localStorage.removeItem('admin_token');
+                //window.location.href = '/';
+                alert('API请求401，失败地址：' + url + '；失败响应：' + response);
                 return;
             }
             
