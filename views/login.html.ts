@@ -135,10 +135,7 @@ export function getLoginPage(): string {
     <script>
         const admintoken = localStorage.getItem('admin_token');
         if (admintoken) {
-            showAlert('检测到已登陆！将在3秒后跳转至控制面板...', 'success');
-            setTimeout(() => {
-                window.location.href = '/admin/dashboard';
-            }, 3000);
+            window.location.href = '/admin/dashboard';
         }
         const loginForm = document.getElementById('loginForm');
         const alertContainer = document.getElementById('alertContainer');
