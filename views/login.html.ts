@@ -156,11 +156,11 @@ export function getLoginPage(): string {
                 if (response.ok) {
                     localStorage.setItem('admin_token', data.token);
                     let cachedtoken = localStorage.getItem('admin_token');
-                    alert('获取的token' + data.token + '；设置的token：' + cachedtoken);
-                    showAlert('登录成功！正在跳转...', 'success');
+                    console.log('API返回token' + data.token + '；本地的token：' + cachedtoken);
+                    showAlert('登录成功！3秒后跳转...', 'success');
                     setTimeout(() => {
                         window.location.href = '/admin/dashboard';
-                    }, 6000);
+                    }, 3000);
                 } else {
                     showAlert(data.error || '登录失败', 'danger');
                 }
