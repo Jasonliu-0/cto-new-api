@@ -133,6 +133,13 @@ export function getLoginPage(): string {
     </div>
 
     <script>
+        const admintoken = localStorage.getItem('admin_token');
+        if (admintoken) {
+            showAlert('检测到已登陆！将在3秒后跳转至控制面板...', 'success');
+            setTimeout(() => {
+                window.location.href = '/admin/dashboard';
+            }, 3000);
+        }
         const loginForm = document.getElementById('loginForm');
         const alertContainer = document.getElementById('alertContainer');
 
@@ -157,7 +164,7 @@ export function getLoginPage(): string {
                     localStorage.setItem('admin_token', data.token);
                     let cachedtoken = localStorage.getItem('admin_token');
                     console.log('API返回token' + data.token + '；本地的token：' + cachedtoken);
-                    showAlert('登录成功！3秒后跳转...', 'success');
+                    showAlert('登录成功！将在3秒后跳转至控制面板...', 'success');
                     setTimeout(() => {
                         window.location.href = '/admin/dashboard';
                     }, 3000);
