@@ -154,18 +154,10 @@ export function getLoginPage(): string {
                 const data = await response.json();
                 
                 if (response.ok) {
-                    localStorage.removeItem('admin_token');
-                    console.log('登陆返回token：' + data.token):
                     localStorage.setItem('admin_token', data.token);
                     let cachedtoken = localStorage.getItem('admin_token');
-                    console.log('本地token为：' + cachedtoken);
-                    if (cachedtoken) {
-                        showAlert('登陆成功，稍后跳转，已设置本地token：' + cachedtoken, 'success');
-                    } else {
-                        showAlert('token设置失败', 'danger');
-                        return;
-                    }
-                    
+                    alert('获取的token' + data.token + '；设置的token：' + cachedtoken);
+                    showAlert('登录成功！正在跳转...', 'success');
                     setTimeout(() => {
                         window.location.href = '/admin/dashboard';
                     }, 6000);
