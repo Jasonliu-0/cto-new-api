@@ -63,13 +63,23 @@ console.log(`
 ║                                                            ║
 ║     🚀 Enginelabs API 转换器 v4.0.0                       ║
 ║                                                            ║
-║     服务地址: http://localhost:${port}                    ║
-║     管理面板: http://localhost:${port}/admin/dashboard    ║
-║                                                            ║
 ║     管理员用户名: ${Config.ADMIN_USERNAME}                ║
 ║     管理员密码: ${Config.ADMIN_PASSWORD}                  ║
 ║                                                            ║
 ╚════════════════════════════════════════════════════════════╝
 `);
 
-await app.listen({ port });
+// 检测是否在 Deno Deploy 环境中
+if (Deno.env.get("DENO_DEPLOYMENT_ID")) {
+  // Deno Deploy 环境 - 导出 fetch handler
+  // @ts-ignore: Deno Deploy 会自动处理这个导出
+  export default {
+    fetch: app.fetch.bind(app)
+  };
+  console.log("🌐 Running on Deno Deploy");
+} else {
+  // 本地开发环境 - 使用传统的 listen
+  console.log(`📍 服务地址: http://localhost:${port}`);
+  console.log(`📊 管理面板: http://localhost:${port}/admin/dashboard`);
+  await app.listen({ port });
+}

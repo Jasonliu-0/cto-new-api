@@ -1,0 +1,23 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-env --allow-read --allow-write --unstable --watch main.ts",
+    "start": "deno run --allow-net --allow-env --allow-read --allow-write --unstable main.ts"
+  },
+  "compilerOptions": {
+    "lib": ["deno.window", "deno.unstable"],
+    "strict": true
+  },
+  "lint": {
+    "include": ["**/*.ts"],
+    "exclude": ["node_modules", ".git"]
+  },
+  "fmt": {
+    "include": ["**/*.ts"],
+    "exclude": ["node_modules", ".git"],
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "imports": {
+    "oak": "https://deno.land/x/oak@v12.6.1/mod.ts"
+  }
+}
