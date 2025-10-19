@@ -70,10 +70,8 @@ console.log(`
 `);
 
 // Deno Deploy 要求在模块顶层导出,不能在条件语句中
-// 导出 fetch handler 供 Deno Deploy 使用
-export default {
-  fetch: app.fetch.bind(app)
-};
+// 导出 fetch handler 供 Deno Deploy 使用 (类似 Cloudflare Workers 模式)
+export default { fetch: app.fetch };
 
 // 本地开发环境启动服务器
 if (!Deno.env.get("DENO_DEPLOYMENT_ID")) {
