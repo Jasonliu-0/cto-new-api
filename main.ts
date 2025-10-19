@@ -69,17 +69,17 @@ console.log(`
 ╚════════════════════════════════════════════════════════════╝
 `);
 
-// 检测是否在 Deno Deploy 环境中
-if (Deno.env.get("DENO_DEPLOYMENT_ID")) {
-  // Deno Deploy 环境 - 导出 fetch handler
-  // @ts-ignore: Deno Deploy 会自动处理这个导出
-  export default {
-    fetch: app.fetch.bind(app)
-  };
-  console.log("🌐 Running on Deno Deploy");
-} else {
-  // 本地开发环境 - 使用传统的 listen
+// Deno Deploy 要求在模块顶层导出,不能在条件语句中
+// 导出 fetch handler 供 Deno Deploy 使用
+export default {
+  fetch: app.fetch.bind(app)
+};
+
+// 本地开发环境启动服务器
+if (!Deno.env.get("DENO_DEPLOYMENT_ID")) {
   console.log(`📍 服务地址: http://localhost:${port}`);
   console.log(`📊 管理面板: http://localhost:${port}/admin/dashboard`);
   await app.listen({ port });
+} else {
+  console.log("🌐 Running on Deno Deploy");
 }
